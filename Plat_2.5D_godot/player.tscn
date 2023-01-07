@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://character.gltf" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.475473
+height = 0.500778
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[node name="player" type="KinematicBody"]
+transform = Transform( -0.0399224, 0, -0.999203, 0, 1, 0, 0.999203, 0, -0.0399224, 0, 0, 0.0968552 )
+axis_lock_motion_z = true
+move_lock_z = true
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, -4.44089e-16, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0194147, 0.819953, 0.0389697 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.0601253, 0, 0.998191, 0, 1, 0, -0.998191, 0, 0.0601253, 7.30486, 1.20516, -0.29062 )
+h_offset = -0.609
+v_offset = -1.047
+projection = 1
+size = 6.58
+
+[node name="character" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 0, 0 )
+
+[node name="Skeleton" parent="character/Armature" index="0"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Model" parent="character/Armature/Skeleton" index="0"]
+transform = Transform( 1, 7.45058e-09, 1.77636e-15, -7.45058e-09, 1, 0, -1.77636e-15, -1.32349e-23, 1, 0, 0, 0 )
+material/0 = SubResource( 3 )
+
+[editable path="character"]
